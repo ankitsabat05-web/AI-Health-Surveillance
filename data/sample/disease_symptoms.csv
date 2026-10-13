@@ -1,0 +1,31 @@
+record_id,fever,cough,headache,fatigue,body_pain,sore_throat,runny_nose,sneezing,chills,joint_pain,nausea,vomiting,diarrhea,abdominal_pain,skin_rash,disease_name,data_source
+DS001,1,0,1,1,1,0,0,0,0,0,0,0,0,0,1,Dengue,synthetic_demo
+DS002,1,0,1,1,1,0,0,0,1,0,0,0,0,0,0,Malaria,synthetic_demo
+DS003,1,1,0,1,0,1,0,0,0,0,0,0,0,0,0,Influenza,synthetic_demo
+DS004,1,1,0,1,0,1,0,0,0,0,0,0,0,0,0,COVID-19,synthetic_demo
+DS005,1,0,1,1,0,0,0,0,0,1,0,0,0,0,0,Chikungunya,synthetic_demo
+DS006,1,0,0,1,0,0,0,0,0,0,1,0,0,1,0,Typhoid,synthetic_demo
+DS007,0,1,0,0,0,1,1,1,0,0,0,0,0,0,0,Common Cold,synthetic_demo
+DS008,0,0,0,1,0,0,0,0,0,0,1,1,1,1,0,Viral Gastroenteritis,synthetic_demo
+DS009,1,0,1,1,1,0,0,0,0,0,0,0,0,0,1,Dengue,synthetic_demo
+DS010,1,0,1,1,1,0,0,0,1,0,1,0,0,0,0,Malaria,synthetic_demo
+DS011,1,1,0,1,0,1,0,0,0,0,0,0,0,0,0,Influenza,synthetic_demo
+DS012,1,1,1,1,0,1,0,0,0,0,0,0,0,0,0,COVID-19,synthetic_demo
+DS013,1,0,1,1,1,0,0,0,0,1,0,0,0,0,0,Chikungunya,synthetic_demo
+DS014,1,0,0,1,0,0,0,0,0,0,1,0,0,1,0,Typhoid,synthetic_demo
+DS015,0,1,0,0,0,1,1,1,0,0,0,0,0,0,0,Common Cold,synthetic_demo
+DS016,0,0,0,1,0,0,0,0,0,0,1,1,1,1,0,Viral Gastroenteritis,synthetic_demo
+DS017,1,0,1,1,1,0,0,0,0,0,1,0,0,0,1,Dengue,synthetic_demo
+DS018,1,0,1,1,1,0,0,0,1,0,0,0,0,0,0,Malaria,synthetic_demo
+DS019,1,1,0,1,0,1,0,0,0,0,0,0,0,0,0,Influenza,synthetic_demo
+DS020,1,1,1,1,0,1,0,0,0,0,0,0,0,0,0,COVID-19,synthetic_demo
+DS021,1,0,0,1,0,0,0,0,0,1,0,0,0,0,0,Chikungunya,synthetic_demo
+DS022,1,0,0,1,0,0,0,0,0,0,1,0,0,1,0,Typhoid,synthetic_demo
+DS023,0,1,0,0,0,1,1,1,0,0,0,0,0,0,0,Common Cold,synthetic_demo
+DS024,0,0,0,1,0,0,0,0,0,0,1,1,1,1,0,Viral Gastroenteritis,synthetic_demo
+DS025,1,0,1,1,1,0,0,0,0,0,0,0,0,0,1,Dengue,synthetic_demo
+DS026,1,0,1,1,1,0,0,0,1,0,0,0,0,0,0,Malaria,synthetic_demo
+DS027,1,1,0,1,0,1,0,0,0,0,0,0,0,0,0,Influenza,synthetic_demo
+DS028,1,1,1,1,0,1,0,0,0,0,0,0,0,0,0,COVID-19,synthetic_demo
+DS029,1,0,0,1,0,0,0,0,0,1,0,0,0,0,0,Chikungunya,synthetic_demo
+DS030,1,0,0,1,0,0,0,0,0,0,1,0,0,1,0,Typhoid,synthetic_demo

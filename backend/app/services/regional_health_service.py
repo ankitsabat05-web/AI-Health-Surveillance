@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import csv
+from datetime import date
 from pathlib import Path
 
 from app.ai.hotspot_detector import (
@@ -40,7 +41,9 @@ def load_regional_health_data(csv_path: Path | str = DEFAULT_CSV_PATH) -> list[R
                         disease=row["disease"].strip(),
                         region_id=row["region_id"].strip(),
                         region_name=row["region_name"].strip(),
-                        observation_date=row["observation_date"],
+                        observation_date=date.fromisoformat(
+                            row["observation_date"].strip()
+                        ),
                         current_cases=int(row["current_cases"]),
                         population=int(row["population"]),
                         historical_cases=historical_cases,

@@ -1,0 +1,31 @@
+text,label
+"Reported symptoms: high fever, severe headache, pain behind the eyes, muscle pain, skin rash",Dengue
+"Reported symptoms: fever, joint pain, headache, nausea, skin rash",Dengue
+"Reported symptoms: high fever, chills, muscle pain, fatigue, pain behind the eyes",Dengue
+"Reported symptoms: fever, severe headache, body pain, skin rash, nausea",Dengue
+"Reported symptoms: headache, high fever, joint pain, fatigue, pain behind the eyes",Dengue
+"Reported symptoms: recurrent fever, chills, sweating, headache, fatigue",Malaria
+"Reported symptoms: fever, shaking chills, muscle pain, nausea, sweating",Malaria
+"Reported symptoms: high fever, chills, headache, vomiting, fatigue",Malaria
+"Reported symptoms: fever, sweating, body pain, nausea, chills",Malaria
+"Reported symptoms: recurrent fever, headache, weakness, chills, muscle pain",Malaria
+"Reported symptoms: fever, dry cough, sore throat, muscle pain, fatigue",Influenza
+"Reported symptoms: cough, fever, headache, chills, runny nose",Influenza
+"Reported symptoms: sore throat, dry cough, fatigue, body pain, fever",Influenza
+"Reported symptoms: fever, cough, congestion, headache, chills",Influenza
+"Reported symptoms: muscle pain, cough, sore throat, fatigue, runny nose",Influenza
+"Reported symptoms: fever, persistent cough, fatigue, loss of smell, shortness of breath",COVID-19
+"Reported symptoms: dry cough, fever, loss of taste, headache, fatigue",COVID-19
+"Reported symptoms: sore throat, cough, congestion, loss of smell, fever",COVID-19
+"Reported symptoms: fever, shortness of breath, fatigue, muscle pain, dry cough",COVID-19
+"Reported symptoms: headache, cough, loss of taste, sore throat, fatigue",COVID-19
+"Reported symptoms: prolonged fever, abdominal pain, weakness, headache, diarrhea",Typhoid
+"Reported symptoms: fever, nausea, abdominal discomfort, fatigue, loss of appetite",Typhoid
+"Reported symptoms: prolonged fever, diarrhea, headache, weakness, nausea",Typhoid
+"Reported symptoms: abdominal pain, fever, vomiting, fatigue, loss of appetite",Typhoid
+"Reported symptoms: fever, weakness, constipation, headache, abdominal discomfort",Typhoid
+"Reported symptoms: fever, severe joint pain, muscle pain, headache, skin rash",Chikungunya
+"Reported symptoms: joint pain, fever, fatigue, swelling, headache",Chikungunya
+"Reported symptoms: high fever, joint pain, rash, muscle pain, nausea",Chikungunya
+"Reported symptoms: fever, swollen joints, fatigue, headache, body pain",Chikungunya
+"Reported symptoms: joint pain, rash, chills, muscle pain, fever",Chikungunya

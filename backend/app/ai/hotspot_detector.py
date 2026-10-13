@@ -34,7 +34,6 @@ import math
 
 from collections.abc import Sequence
 from datetime import date
-from statistics import median
 from typing import Literal
 
 from pydantic import (
@@ -498,10 +497,6 @@ class HotspotDetector:
         historical_average = (
             sum(historical_rates)
             / len(historical_rates)
-        )
-
-        historical_median = median(
-            historical_rates
         )
 
         # Compare against the historical average.

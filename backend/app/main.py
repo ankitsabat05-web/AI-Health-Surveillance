@@ -14,7 +14,7 @@ from starlette.middleware.trustedhost import TrustedHostMiddleware
 
 from app.config import settings
 from app.database.database import engine
-from app.utils.logger import log_error, log_event, logger
+from app.utils.logger import log_access, log_error, log_event, logger
 
 
 # ============================================================
@@ -255,9 +255,8 @@ async def request_middleware(request: Request, call_next):
             "max-age=31536000; includeSubDomains"
         )
 
-    log_event(
+    log_access(
         "HTTP request completed",
-        level=logging.INFO,
         method=request.method,
         path=request.url.path,
         status_code=response.status_code,
@@ -376,20 +375,21 @@ async def health_check():
 # ROUTER REGISTRATION
 # ============================================================
 
-# Import and include routers after core application setup.
-# Adjust import paths to match the actual router variable names and files in your project.
-# Example:
-# from app.api.routes_auth import router as auth_router
-# from app.api.routes_users import router as users_router
-# from app.api.routes_reports import router as reports_router
-# from app.api.routes_ai import router as ai_router
-# from app.api.routes_admin import router as admin_router
-# from app.api.routes_alerts import router as alerts_router
-# from app.api.routes_dashboard import router as dashboard_router
-# app.include_router(auth_router, prefix=settings.API_V1_PREFIX)
-# app.include_router(users_router, prefix=settings.API_V1_PREFIX)
-# app.include_router(reports_router, prefix=settings.API_V1_PREFIX)
-# app.include_router(ai_router, prefix=settings.API_V1_PREFIX)
-# app.include_router(admin_router, prefix=settings.API_V1_PREFIX)
-# app.include_router(alerts_router, prefix=settings.API_V1_PREFIX)
-# app.include_router(dashboard_router, prefix=settings.API_V1_PREFIX)
+from app.api.routes_admin import router as admin_router
+from app.api.routes_ai import router as ai_router
+from app.api.routes_alerts import router as alerts_router
+from app.api.routes_auth import router as auth_router
+from app.api.routes_dashboard import router as dashboard_router
+from app.api.routes_reports import router as reports_router
+from app.api.routes_users import router as users_router
+
+for api_router in (
+    auth_router,
+    users_router,
+    reports_router,
+    ai_router,
+    admin_router,
+    alerts_router,
+    dashboard_router,
+):
+    app.include_router(api_router, prefix=settings.API_V1_PREFIX)

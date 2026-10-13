@@ -1,0 +1,31 @@
+report_id,report_date,region_id,symptoms,disease_name,status,data_source
+HR-0001,2026-10-13,IN-MH-MUM,high fever; severe headache; pain behind the eyes; muscle pain; skin rash,Dengue,pending,synthetic_demo
+HR-0002,2026-10-13,IN-MH-PUN,fever; joint pain; headache; nausea; skin rash,Dengue,pending,synthetic_demo
+HR-0003,2026-10-13,IN-KA-BLR,high fever; chills; muscle pain; fatigue; pain behind the eyes,Dengue,pending,synthetic_demo
+HR-0004,2026-10-13,IN-DL-ND,fever; severe headache; body pain; skin rash; nausea,Dengue,pending,synthetic_demo
+HR-0005,2026-10-13,IN-TN-CHN,headache; high fever; joint pain; fatigue; pain behind the eyes,Dengue,pending,synthetic_demo
+HR-0006,2026-10-13,IN-MH-MUM,recurrent fever; chills; sweating; headache; fatigue,Malaria,pending,synthetic_demo
+HR-0007,2026-10-13,IN-MH-PUN,fever; shaking chills; muscle pain; nausea; sweating,Malaria,pending,synthetic_demo
+HR-0008,2026-10-13,IN-KA-BLR,high fever; chills; headache; vomiting; fatigue,Malaria,pending,synthetic_demo
+HR-0009,2026-10-13,IN-DL-ND,fever; sweating; body pain; nausea; chills,Malaria,pending,synthetic_demo
+HR-0010,2026-10-13,IN-TN-CHN,recurrent fever; headache; weakness; chills; muscle pain,Malaria,pending,synthetic_demo
+HR-0011,2026-10-13,IN-MH-MUM,fever; dry cough; sore throat; muscle pain; fatigue,Influenza,pending,synthetic_demo
+HR-0012,2026-10-13,IN-MH-PUN,cough; fever; headache; chills; runny nose,Influenza,pending,synthetic_demo
+HR-0013,2026-10-13,IN-KA-BLR,sore throat; dry cough; fatigue; body pain; fever,Influenza,pending,synthetic_demo
+HR-0014,2026-10-13,IN-DL-ND,fever; cough; congestion; headache; chills,Influenza,pending,synthetic_demo
+HR-0015,2026-10-13,IN-TN-CHN,muscle pain; cough; sore throat; fatigue; runny nose,Influenza,pending,synthetic_demo
+HR-0016,2026-10-13,IN-MH-MUM,fever; persistent cough; fatigue; loss of smell; shortness of breath,COVID-19,pending,synthetic_demo
+HR-0017,2026-10-13,IN-MH-PUN,dry cough; fever; loss of taste; headache; fatigue,COVID-19,pending,synthetic_demo
+HR-0018,2026-10-13,IN-KA-BLR,sore throat; cough; congestion; loss of smell; fever,COVID-19,pending,synthetic_demo
+HR-0019,2026-10-13,IN-DL-ND,fever; shortness of breath; fatigue; muscle pain; dry cough,COVID-19,pending,synthetic_demo
+HR-0020,2026-10-13,IN-TN-CHN,headache; cough; loss of taste; sore throat; fatigue,COVID-19,pending,synthetic_demo
+HR-0021,2026-10-13,IN-MH-MUM,prolonged fever; abdominal pain; weakness; headache; diarrhea,Typhoid,pending,synthetic_demo
+HR-0022,2026-10-13,IN-MH-PUN,fever; nausea; abdominal discomfort; fatigue; loss of appetite,Typhoid,pending,synthetic_demo
+HR-0023,2026-10-13,IN-KA-BLR,prolonged fever; diarrhea; headache; weakness; nausea,Typhoid,pending,synthetic_demo
+HR-0024,2026-10-13,IN-DL-ND,abdominal pain; fever; vomiting; fatigue; loss of appetite,Typhoid,pending,synthetic_demo
+HR-0025,2026-10-13,IN-TN-CHN,fever; weakness; constipation; headache; abdominal discomfort,Typhoid,pending,synthetic_demo
+HR-0026,2026-10-13,IN-MH-MUM,fever; severe joint pain; muscle pain; headache; skin rash,Chikungunya,pending,synthetic_demo
+HR-0027,2026-10-13,IN-MH-PUN,joint pain; fever; fatigue; swelling; headache,Chikungunya,pending,synthetic_demo
+HR-0028,2026-10-13,IN-KA-BLR,high fever; joint pain; rash; muscle pain; nausea,Chikungunya,pending,synthetic_demo
+HR-0029,2026-10-13,IN-DL-ND,fever; swollen joints; fatigue; headache; body pain,Chikungunya,pending,synthetic_demo
+HR-0030,2026-10-13,IN-TN-CHN,joint pain; rash; chills; muscle pain; fever,Chikungunya,pending,synthetic_demo

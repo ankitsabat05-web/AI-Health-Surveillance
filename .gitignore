@@ -3,6 +3,8 @@ __pycache__/
 *.pyc
 *.pyo
 *.pyd
+logs/*.log
+backend/logs/*.log
 .env
 .env.*
 .pytest_cache/

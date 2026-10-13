@@ -27,8 +27,7 @@ from __future__ import annotations
 
 import logging
 
-from collections.abc import Sequence
-from typing import Literal
+from typing import Literal, TypedDict
 
 from pydantic import (
     BaseModel,
@@ -52,6 +51,28 @@ logger = logging.getLogger(__name__)
 MAX_RECOMMENDATIONS = 10
 
 MAX_TEXT_LENGTH = 150
+
+RecommendationPriority = Literal[
+    "low",
+    "medium",
+    "high",
+    "urgent",
+]
+RecommendationCategory = Literal[
+    "surveillance",
+    "investigation",
+    "prevention",
+    "communication",
+    "data_quality",
+    "clinical_review",
+]
+
+
+class DiseaseRule(TypedDict):
+    title: str
+    description: str
+    category: RecommendationCategory
+    reason: str
 
 SUPPORTED_SEVERITIES = {
     "normal",
@@ -248,7 +269,7 @@ class RecommendationEngine:
 
     def __init__(self) -> None:
 
-        self._disease_rules = {
+        self._disease_rules: dict[str, list[DiseaseRule]] = {
             "dengue": [
                 {
                     "title": "Review mosquito-control measures",
@@ -376,8 +397,8 @@ class RecommendationEngine:
     def _make_recommendation(
         title: str,
         description: str,
-        priority: str,
-        category: str,
+        priority: RecommendationPriority,
+        category: RecommendationCategory,
         reason: str,
     ) -> Recommendation:
 

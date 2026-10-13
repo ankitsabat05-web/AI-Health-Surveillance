@@ -1,34 +1,15 @@
 from __future__ import annotations
 
-from datetime import datetime
+from datetime import datetime, timezone
 
-try:
-    from sqlalchemy import DateTime, String, Text
-    from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
+from sqlalchemy import DateTime, String, Text
+from sqlalchemy.orm import Mapped, mapped_column
 
-    class Base(DeclarativeBase):
-        pass
+from app.database.database import Base
 
-except ImportError:  # pragma: no cover - fallback for lightweight import checks.
-    class Base:
-        pass
 
-    class Mapped:
-        pass
-
-    def mapped_column(*args, **kwargs):
-        return None
-
-    class DateTime:
-        pass
-
-    class String:
-        def __init__(self, *args, **kwargs):
-            pass
-
-    class Text:
-        def __init__(self, *args, **kwargs):
-            pass
+def utc_now() -> datetime:
+    return datetime.now(timezone.utc)
 
 
 class Alert(Base):
@@ -43,7 +24,7 @@ class Alert(Base):
     region_id: Mapped[str | None] = mapped_column(String(100), nullable=True)
     created_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True),
-        default=datetime.utcnow,
+        default=utc_now,
         nullable=False,
         index=True,
     )

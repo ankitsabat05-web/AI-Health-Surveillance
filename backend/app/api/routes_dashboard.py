@@ -114,5 +114,3 @@ def get_dashboard_overview(
         unique_diseases_reported=unique_diseases,
         generated_at=now,
     )
-
-    return DashboardOverview

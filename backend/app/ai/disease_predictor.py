@@ -34,7 +34,7 @@ import math
 from functools import lru_cache
 from pathlib import Path
 from threading import Lock
-from typing import Literal
+from typing import Any, Literal
 
 import joblib
 
@@ -226,7 +226,7 @@ class DiseasePredictor:
 
     def __init__(self) -> None:
 
-        self._model = None
+        self._model: Any | None = None
         self._model_lock = Lock()
         self._load_attempted = False
 
@@ -349,6 +349,10 @@ class DiseasePredictor:
                 ),
             )
 
+        model = self._model
+        if model is None:
+            raise RuntimeError("Loaded disease prediction model is missing.")
+
         try:
 
             model_input = self._prepare_input(
@@ -362,7 +366,7 @@ class DiseasePredictor:
             with self._model_lock:
 
                 predicted_labels = (
-                    self._model.predict(model_input)
+                model.predict(model_input)
                 )
 
                 predicted_label = str(
@@ -370,19 +374,20 @@ class DiseasePredictor:
                 )
 
                 probability_method = getattr(
-                    self._model,
+                    model,
                     "predict_proba",
                     None,
                 )
 
                 if callable(probability_method):
 
-                    probabilities = (
-                        probability_method(model_input)[0]
+                    probability_output: Any = probability_method(
+                        model_input
                     )
+                    probabilities = probability_output[0]
 
                     classes = getattr(
-                        self._model,
+                        model,
                         "classes_",
                         None,
                     )

@@ -46,6 +46,7 @@ from app.ai.recommendation_engine import (
 # Adapt these imports to the actual security modules in your project.
 from app.security.authentication import get_current_user
 from app.security.authorization import require_health_official
+from app.utils.logger import log_ai_prediction
 
 logger = logging.getLogger(__name__)
 
@@ -148,7 +149,9 @@ def analyze_user_symptoms(
     """
 
     try:
-        return analyze_symptoms(request)
+        result = analyze_symptoms(request)
+        log_ai_prediction("symptom_analysis", type(result).__name__)
+        return result
 
     except ValueError as exc:
         raise HTTPException(
@@ -185,7 +188,9 @@ def forecast_health_trend(
     """
 
     try:
-        return forecast_disease_trend(request)
+        result = forecast_disease_trend(request)
+        log_ai_prediction("trend_forecast", type(result).__name__)
+        return result
 
     except ValueError as exc:
         raise HTTPException(
@@ -221,7 +226,9 @@ def analyze_outbreak_signals(
     """
 
     try:
-        return detect_outbreak(request)
+        result = detect_outbreak(request)
+        log_ai_prediction("outbreak_analysis", type(result).__name__)
+        return result
 
     except ValueError as exc:
         raise HTTPException(
@@ -258,7 +265,9 @@ def analyze_health_hotspot(
     """
 
     try:
-        return detect_hotspot(request)
+        result = detect_hotspot(request)
+        log_ai_prediction("hotspot_analysis", type(result).__name__)
+        return result
 
     except ValueError as exc:
         raise HTTPException(
@@ -300,7 +309,9 @@ def assess_public_health_risk(
     """
 
     try:
-        return assess_risk(request)
+        result = assess_risk(request)
+        log_ai_prediction("risk_assessment", type(result).__name__)
+        return result
 
     except ValueError as exc:
         raise HTTPException(
@@ -337,7 +348,9 @@ def get_health_recommendations(
     """
 
     try:
-        return generate_recommendations(request)
+        result = generate_recommendations(request)
+        log_ai_prediction("recommendations", type(result).__name__)
+        return result
 
     except ValueError as exc:
         raise HTTPException(

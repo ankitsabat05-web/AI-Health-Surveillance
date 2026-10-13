@@ -23,6 +23,7 @@ from sqlalchemy.orm import Session
 from app.config import settings
 from app.database.database import get_db
 from app.models.user import User
+from app.utils.logger import log_security
 
 logger = logging.getLogger(__name__)
 
@@ -216,6 +217,11 @@ def register_user(
         db.commit()
         db.refresh(user)
 
+        log_security(
+            "User account registered",
+            user_id=user.id,
+            role="user",
+        )
         return _to_user_response(user)
 
     except HTTPException:
@@ -266,6 +272,7 @@ def login_user(
 
     # Never reveal whether the account exists.
     if user is None:
+        log_security("Login failed", reason="invalid_credentials")
         raise _unauthorized()
 
     try:
@@ -278,9 +285,15 @@ def login_user(
         raise _unauthorized()
 
     if not password_valid or not user.is_active:
+        log_security(
+            "Login failed",
+            user_id=user.id,
+            reason="invalid_credentials",
+        )
         raise _unauthorized()
 
     token, expires_in = create_access_token(user.id)
+    log_security("Login succeeded", user_id=user.id)
 
     return TokenResponse(
         access_token=token,
