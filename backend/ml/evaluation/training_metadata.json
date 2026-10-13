@@ -1,0 +1,45 @@
+{
+  "project_name": "AI Health Surveillance & Early Disease Detection System",
+  "model_name": "Disease Prediction Model",
+  "model_version": "1.0.0",
+  "model_type": "Machine Learning Classification",
+  "algorithm": "Random Forest Classifier",
+  "training_status": "not_trained",
+  "dataset": {
+    "file_name": "health_reports.csv",
+    "target_column": "disease_name",
+    "feature_columns": [
+      "symptoms",
+      "age",
+      "gender",
+      "region_id"
+    ],
+    "total_records": 0,
+    "training_records": 0,
+    "testing_records": 0,
+    "preprocessing": [
+      "Validate input data",
+      "Handle missing values",
+      "Encode categorical features",
+      "Split data into training and testing sets"
+    ]
+  },
+  "training_configuration": {
+    "test_size": 0.2,
+    "random_state": 42,
+    "n_estimators": 100,
+    "class_weight": "balanced"
+  },
+  "evaluation_metrics": {
+    "accuracy": null,
+    "precision": null,
+    "recall": null,
+    "f1_score": null
+  },
+  "artifacts": {
+    "model_path": "backend/ml/models/disease_prediction_model.pkl",
+    "metadata_path": "backend/ml/models/training_metadata.json"
+  },
+  "last_trained_at": null,
+  "notes": "Model has not been trained. Evaluation metrics and record counts must be populated after training."
+}

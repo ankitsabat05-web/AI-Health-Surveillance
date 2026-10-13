@@ -1,0 +1,104 @@
+
+from pathlib import Path
+import pandas as pd
+import joblib
+
+from sklearn.model_selection import train_test_split
+from sklearn.pipeline import Pipeline
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import accuracy_score, f1_score
+
+BASE_DIR = Path(__file__).resolve().parent
+MODEL_DIR = BASE_DIR / "models"
+DATASET_PATH = BASE_DIR / "datasets" / "disease_dataset.csv"
+
+MODEL_DIR.mkdir(parents=True, exist_ok=True)
+
+MODEL_PATH = MODEL_DIR / "disease_model.pkl"
+
+def train_model():
+    if not DATASET_PATH.exists():
+        raise FileNotFoundError(
+            f"Dataset not found: {DATASET_PATH}"
+        )
+
+    df = pd.read_csv(DATASET_PATH)
+
+    required = {"symptoms", "disease_name"}
+    if not required.issubset(df.columns):
+        raise ValueError(
+            "Dataset must contain symptoms and disease_name columns."
+        )
+
+    df = df.dropna(subset=["symptoms", "disease_name"])
+    df["symptoms"] = df["symptoms"].astype(str).str.strip()
+    df["disease_name"] = df["disease_name"].astype(str).str.strip()
+    df = df[
+        (df["symptoms"] != "") &
+        (df["disease_name"] != "")
+    ]
+
+    if df["disease_name"].nunique() < 2:
+        raise ValueError(
+            "At least two disease classes are required."
+        )
+
+    counts = df["disease_name"].value_counts()
+    if counts.min() < 2:
+        raise ValueError(
+            "Each disease class needs at least two records."
+        )
+
+    X = df["symptoms"]
+    y = df["disease_name"]
+
+    X_train, X_test, y_train, y_test = train_test_split(
+        X,
+        y,
+        test_size=0.2,
+        random_state=42,
+        stratify=y
+    )
+
+    model = Pipeline([
+        ("tfidf", TfidfVectorizer()),
+        ("classifier", LogisticRegression(
+            max_iter=1000,
+            class_weight="balanced"
+        ))
+    ])
+
+    model.fit(X_train, y_train)
+    predictions = model.predict(X_test)
+
+    metadata = {
+        "model_name": "Disease Prediction Model",
+        "model_version": "1.0.0",
+        "algorithm": "TF-IDF + Logistic Regression",
+        "training_records": int(len(X_train)),
+        "testing_records": int(len(X_test)),
+        "disease_classes": sorted(y.unique().tolist()),
+        "accuracy": float(accuracy_score(y_test, predictions)),
+        "f1_score_weighted": float(
+            f1_score(y_test, predictions, average="weighted")
+        ),
+        "training_status": "trained"
+    }
+
+    joblib.dump(model, MODEL_PATH)
+
+    import json
+    metadata_path = MODEL_DIR / "training_metadata.json"
+    metadata_path.write_text(
+        json.dumps(metadata, indent=4),
+        encoding="utf-8"
+    )
+
+    print(f"Model saved: {MODEL_PATH}")
+    print(f"Metadata saved: {metadata_path}")
+    print(f"Accuracy: {metadata['accuracy']:.2%}")
+    print(f"Weighted F1: {metadata['f1_score_weighted']:.2%}")
+
+if __name__ == "__main__":
+    train_model()
