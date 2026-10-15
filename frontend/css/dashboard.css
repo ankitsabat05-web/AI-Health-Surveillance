@@ -1,0 +1,5 @@
+.dashboard-page .welcome-strip { display: flex; justify-content: space-between; align-items: center; gap: 16px; margin-bottom: 20px; padding: 18px 21px; border-radius: 12px; background: linear-gradient(115deg, #e3f4f0, #eef6fb); }
+.dashboard-page .welcome-strip h2 { margin: 0 0 5px; font-size: 16px; }
+.dashboard-page .welcome-strip p { margin: 0; color: var(--muted); font-size: 12px; }
+.dashboard-page .recent-table { margin-top: 20px; }
+.dashboard-page .status-note { padding: 12px 14px; border-radius: 8px; background: #f2f7f6; color: var(--muted); font-size: 11px; line-height: 1.55; }

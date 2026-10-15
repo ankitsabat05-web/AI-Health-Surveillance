@@ -1,0 +1,10 @@
+.admin-page .page-content { max-width: 1360px; }
+.admin-page .metric-card { min-height: 132px; }
+.admin-page .card__header { align-items: center; }
+.admin-page .chart-panel { min-height: 270px; }
+.admin-page .surveillance-note { margin-top: 14px; color: var(--muted); font-size: 10px; line-height: 1.55; }
+.admin-page .trend-toolbar { display: flex; gap: 10px; flex-wrap: wrap; align-items: end; }
+.admin-page .trend-toolbar .field { flex: 1; min-width: 145px; }
+.admin-page .result-highlight { display: flex; flex-wrap: wrap; gap: 14px; margin: 18px 0; }
+.admin-page .result-highlight > div { min-width: 140px; padding: 14px; border: 1px solid var(--line); border-radius: 9px; background: #f8fbfa; }
+.admin-page .result-highlight strong { display: block; margin-top: 8px; font-size: 19px; text-transform: capitalize; }

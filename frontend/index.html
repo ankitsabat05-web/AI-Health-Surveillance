@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#12343a"><title>HealthWatch · Sign in</title><link rel="stylesheet" href="css/style.css"><script defer src="js/api.js"></script><script defer src="js/auth.js"></script></head>
+<body><main class="auth-page">
+  <section class="auth-intro"><a class="brand" href="index.html"><span class="brand__mark">+</span><span>HealthWatch<small>Health surveillance</small></span></a><p class="eyebrow">Early signals. Informed action.</p><h1>Community health, seen clearly.</h1><p>A secure health-surveillance portal for submitting health reports and reviewing aggregate public-health signals.</p><div class="auth-feature"><span>✓ Submit and track a personal health report</span><span>✓ Health officials can review trends and alerts</span><span>✓ Screening outputs are decision support, never a diagnosis</span></div></section>
+  <section class="auth-content"><div class="auth-card">
+    <div class="notice notice--info" data-setup-message hidden></div>
+    <section id="login-panel"><h2>Welcome back</h2><p>Sign in with your registered account. Official access must be provisioned and verified separately.</p><form data-auth-form="login">
+      <div class="field"><label for="login-email">Email address</label><input id="login-email" name="email" type="email" autocomplete="username" required></div>
+      <div class="field"><label for="login-password">Password</label><input id="login-password" name="password" type="password" autocomplete="current-password" required></div>
+      <div class="notice" data-form-message hidden></div><button class="button" type="submit">Sign in</button>
+    </form></section>
+    <section id="register-panel" hidden><h2>Create your account</h2><p>Registration creates a personal user account. It does not grant health-official or administrator privileges.</p><form data-auth-form="register">
+      <div class="field"><label for="register-name">Full name</label><input id="register-name" name="full_name" autocomplete="name" minlength="2" maxlength="100" required></div>
+      <div class="field"><label for="register-email">Email address</label><input id="register-email" name="email" type="email" autocomplete="email" required></div>
+      <div class="field"><label for="register-password">Password</label><input id="register-password" name="password" type="password" minlength="12" maxlength="128" autocomplete="new-password" required><small>Use at least 12 characters.</small></div>
+      <div class="notice" data-form-message hidden></div><button class="button" type="submit">Create personal account</button>
+    </form></section>
+    <button class="auth-switch" type="button" data-auth-switch>Create a personal account</button>
+  </div></section>
+</main></body></html>

@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Hotspot screening · HealthWatch</title><link rel="stylesheet" href="../css/style.css"><link rel="stylesheet" href="../css/admin.css"><script defer src="../js/api.js"></script><script defer src="../js/auth.js"></script><script defer src="../js/admin.js"></script></head>
+<body class="admin-page" data-page="admin-hotspots"><div class="app-shell"><aside class="sidebar">
+  <a class="brand" href="dashboard.html"><span class="brand__mark">+</span><span>HealthWatch<small>Surveillance portal</small></span></a><div class="nav-label">Monitoring</div><nav class="nav-list" aria-label="Official navigation">
+    <a class="nav-link" href="dashboard.html"><span class="nav-link__icon">◫</span>Overview</a><a class="nav-link" href="analytics.html"><span class="nav-link__icon">▥</span>Analytics</a><a class="nav-link" href="reports.html"><span class="nav-link__icon">▤</span>Health reports</a><a class="nav-link" href="disease-monitor.html"><span class="nav-link__icon">⌁</span>Disease trends</a><a class="nav-link" aria-current="page" href="hotspots.html"><span class="nav-link__icon">◎</span>Hotspot screening</a><a class="nav-link" href="alerts.html"><span class="nav-link__icon">♧</span>Alerts</a>
+  </nav><div class="sidebar__bottom"><button class="nav-link" data-logout><span class="nav-link__icon">↪</span>Sign out</button></div></aside>
+  <main class="main-area"><header class="topbar"><span class="topbar__crumb">Health authority / Hotspot screening</span><div class="account"><span class="avatar">H</span><span><span class="account__name" data-profile-name>Health official</span><span class="account__role" data-profile-role>health official</span></span></div></header>
+    <div class="page-content"><div class="page-heading"><div><p class="eyebrow">AI-assisted decision support</p><h1>Regional hotspot screening</h1><p>Compare a region's current reported cases with its historical baseline and population.</p></div></div>
+      <p class="callout">This statistical screen is preliminary decision support, not confirmation of an outbreak. Use aggregate data only; do not submit personally identifying information.</p>
+      <div id="page-message" class="notice section-gap" hidden></div>
+      <section class="grid grid--2 section-gap"><form id="hotspot-form" class="card form-grid">
+        <div class="field"><label for="hotspot-disease">Disease</label><input id="hotspot-disease" name="disease" required minlength="2" maxlength="100" placeholder="Dengue"></div>
+        <div class="field"><label for="hotspot-date">Observation date</label><input id="hotspot-date" name="observation_date" type="date" required></div>
+        <div class="field"><label for="hotspot-region-id">Region ID</label><input id="hotspot-region-id" name="region_id" required maxlength="50" placeholder="IN-MH-MUM"></div>
+        <div class="field"><label for="hotspot-region-name">Region name</label><input id="hotspot-region-name" name="region_name" required minlength="2" maxlength="150" placeholder="Mumbai"></div>
+        <div class="field"><label for="current-cases">Current cases</label><input id="current-cases" name="current_cases" type="number" min="0" max="1000000000" required></div>
+        <div class="field"><label for="population">Population</label><input id="population" name="population" type="number" min="1" max="2000000000" required></div>
+        <div class="field field--full"><label for="historical-cases">Historical comparable case counts</label><input id="historical-cases" name="historical_cases" required placeholder="5, 7, 4, 6, 8, 5, 7"><small>Enter 7–365 non-negative whole-number observations, oldest first.</small></div>
+        <div class="field field--full"><button class="button" type="submit">Run hotspot screen</button></div>
+      </form>
+      <article id="hotspot-result" class="card" hidden><div class="card__header"><div><p class="eyebrow">Screening output</p><h2 id="hotspot-level">—</h2></div></div><div class="result-highlight"><div>Current rate<strong id="hotspot-rate">—</strong></div><div>Historical comparison<strong id="hotspot-ratio">—</strong></div></div><p id="hotspot-explanation" class="help-text"></p><p class="surveillance-note">Requires official review. The result is not a diagnosis or confirmed outbreak.</p></article></section>
+    </div>
+  </main></div></body></html>

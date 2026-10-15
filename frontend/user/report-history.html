@@ -1,0 +1,14 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Report history · HealthWatch</title><link rel="stylesheet" href="../css/style.css"><script defer src="../js/api.js"></script><script defer src="../js/auth.js"></script><script defer src="../js/user.js"></script></head>
+<body data-page="report-history"><div class="app-shell"><aside class="sidebar">
+  <a class="brand" href="dashboard.html"><span class="brand__mark">+</span><span>HealthWatch<small>Community portal</small></span></a><div class="nav-label">My health</div><nav class="nav-list" aria-label="Personal navigation">
+    <a class="nav-link" href="dashboard.html"><span class="nav-link__icon">◫</span>Overview</a><a class="nav-link" href="report-health.html"><span class="nav-link__icon">＋</span>Submit a report</a><a class="nav-link" aria-current="page" href="report-history.html"><span class="nav-link__icon">▤</span>Report history</a><a class="nav-link" href="profile.html"><span class="nav-link__icon">◉</span>My profile</a>
+  </nav><div class="sidebar__bottom"><button class="nav-link" data-logout><span class="nav-link__icon">↪</span>Sign out</button></div></aside>
+  <main class="main-area"><header class="topbar"><span class="topbar__crumb">Community / Report history</span><div class="account"><span class="avatar">U</span><span><span class="account__name" data-profile-name>Community member</span><span class="account__role" data-profile-role>user</span></span></div></header>
+    <div class="page-content"><div class="page-heading"><div><p class="eyebrow">Personal records</p><h1>Report history</h1><p>See the reports submitted from your account and their current workflow status.</p></div><a class="button" href="report-health.html">New report</a></div>
+      <div id="page-message" class="notice" hidden></div>
+      <section class="card"><div class="card__header"><div><h2>Your submissions</h2><p>Reports are shown newest first.</p></div></div><div class="table-wrap"><table><thead><tr><th>Submitted</th><th>Disease name</th><th>Region</th><th>Symptoms</th><th>Status</th></tr></thead><tbody id="report-history"><tr><td colspan="5" class="empty-cell">Loading your report history…</td></tr></tbody></table></div></section>
+      <p class="status-note section-gap">A report status communicates the review workflow. It should not be interpreted as a medical diagnosis.</p>
+    </div>
+  </main></div></body></html>

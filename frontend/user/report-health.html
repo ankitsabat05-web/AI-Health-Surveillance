@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Submit a health report · HealthWatch</title><link rel="stylesheet" href="../css/style.css"><script defer src="../js/api.js"></script><script defer src="../js/auth.js"></script><script defer src="../js/user.js"></script></head>
+<body data-page="report-health"><div class="app-shell"><aside class="sidebar">
+  <a class="brand" href="dashboard.html"><span class="brand__mark">+</span><span>HealthWatch<small>Community portal</small></span></a><div class="nav-label">My health</div><nav class="nav-list" aria-label="Personal navigation">
+    <a class="nav-link" href="dashboard.html"><span class="nav-link__icon">◫</span>Overview</a><a class="nav-link" aria-current="page" href="report-health.html"><span class="nav-link__icon">＋</span>Submit a report</a><a class="nav-link" href="report-history.html"><span class="nav-link__icon">▤</span>Report history</a><a class="nav-link" href="profile.html"><span class="nav-link__icon">◉</span>My profile</a>
+  </nav><div class="sidebar__bottom"><button class="nav-link" data-logout><span class="nav-link__icon">↪</span>Sign out</button></div></aside>
+  <main class="main-area"><header class="topbar"><span class="topbar__crumb">Community / Submit a report</span><div class="account"><span class="avatar">U</span><span><span class="account__name" data-profile-name>Community member</span><span class="account__role" data-profile-role>user</span></span></div></header>
+    <div class="page-content"><div class="page-heading"><div><p class="eyebrow">Community reporting</p><h1>Submit a health report</h1><p>Share the symptoms and region needed for public-health surveillance. Avoid including names, phone numbers, or other identifying details in the description.</p></div></div>
+      <div id="form-message" class="notice" hidden></div>
+      <section class="grid grid--2">
+        <form id="health-report-form" class="card stack">
+          <div><h2>Report details</h2><p class="help-text">Your report will be stored with a submitted status for official review.</p></div>
+          <div class="field"><label for="disease-name">Disease or health concern</label><input id="disease-name" name="disease_name" required minlength="2" maxlength="100" placeholder="e.g. Dengue"></div>
+          <div class="field"><label for="report-symptoms">Symptoms</label><input id="report-symptoms" name="symptoms" required placeholder="fever, headache, joint pain"><small>Separate symptoms with commas; enter at least one.</small></div>
+          <div class="field"><label for="region-id">Region ID</label><input id="region-id" name="region_id" required maxlength="100" placeholder="e.g. IN-MH-MUM"></div>
+          <div class="field"><label for="report-description">Description (optional)</label><textarea id="report-description" name="description" maxlength="2000" placeholder="When symptoms started or other relevant, non-identifying context."></textarea></div>
+          <button class="button" type="submit">Submit report</button>
+        </form>
+        <div class="stack">
+          <form id="symptom-screen-form" class="card stack">
+            <div><p class="eyebrow">Optional tool</p><h2>Preliminary symptom screening</h2><p class="help-text">This screening is not a diagnosis and does not replace professional medical care.</p></div>
+            <div class="field"><label for="screen-symptoms">Symptoms</label><input id="screen-symptoms" name="symptoms" required placeholder="fever, cough"><small>Use ordinary English symptom descriptions, separated by commas.</small></div>
+            <div class="form-grid"><div class="field"><label for="screen-age">Age (optional)</label><input id="screen-age" name="age" type="number" min="0" max="120"></div><div class="field"><label for="screen-duration">Duration in days (optional)</label><input id="screen-duration" name="duration_days" type="number" min="0" max="365"></div></div>
+            <div id="screening-message" class="notice" hidden></div><button class="button button--quiet" type="submit">Screen symptoms</button>
+          </form>
+          <article id="screening-result" class="card" hidden><div class="card__header"><div><p class="eyebrow">Preliminary screening</p><h2 id="screening-urgency">—</h2></div></div><ul id="screening-guidance" class="help-text"></ul><p id="screening-disclaimer" class="callout"></p></article>
+        </div>
+      </section>
+      <p class="callout section-gap">If symptoms are severe, worsening, or feel like an emergency, seek urgent medical care. Do not wait for an online screening result.</p>
+    </div>
+  </main></div></body></html>

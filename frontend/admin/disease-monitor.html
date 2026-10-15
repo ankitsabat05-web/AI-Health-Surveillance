@@ -1,0 +1,15 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Disease trends · HealthWatch</title><link rel="stylesheet" href="../css/style.css"><link rel="stylesheet" href="../css/admin.css"><script defer src="../js/api.js"></script><script defer src="../js/auth.js"></script><script defer src="../js/charts.js"></script><script defer src="../js/admin.js"></script></head>
+<body class="admin-page" data-page="admin-disease-monitor"><div class="app-shell"><aside class="sidebar">
+  <a class="brand" href="dashboard.html"><span class="brand__mark">+</span><span>HealthWatch<small>Surveillance portal</small></span></a><div class="nav-label">Monitoring</div><nav class="nav-list" aria-label="Official navigation">
+    <a class="nav-link" href="dashboard.html"><span class="nav-link__icon">◫</span>Overview</a><a class="nav-link" href="analytics.html"><span class="nav-link__icon">▥</span>Analytics</a><a class="nav-link" href="reports.html"><span class="nav-link__icon">▤</span>Health reports</a><a class="nav-link" aria-current="page" href="disease-monitor.html"><span class="nav-link__icon">⌁</span>Disease trends</a><a class="nav-link" href="hotspots.html"><span class="nav-link__icon">◎</span>Hotspot screening</a><a class="nav-link" href="alerts.html"><span class="nav-link__icon">♧</span>Alerts</a>
+  </nav><div class="sidebar__bottom"><button class="nav-link" data-logout><span class="nav-link__icon">↪</span>Sign out</button></div></aside>
+  <main class="main-area"><header class="topbar"><span class="topbar__crumb">Health authority / Disease trends</span><div class="account"><span class="avatar">H</span><span><span class="account__name" data-profile-name>Health official</span><span class="account__role" data-profile-role>health official</span></span></div></header>
+    <div class="page-content"><div class="page-heading"><div><p class="eyebrow">Time-series reporting</p><h1>Disease trends</h1><p>View daily report counts for one disease over a selected period. Use trends as a surveillance signal for human review.</p></div></div>
+      <div id="page-message" class="notice" hidden></div>
+      <form id="trend-form" class="card trend-toolbar"><div class="field"><label for="disease-name">Disease name</label><input id="disease-name" name="disease_name" required minlength="2" maxlength="100" value="Dengue"></div><div class="field"><label for="start-date">From</label><input id="start-date" name="start_date" type="date" required></div><div class="field"><label for="end-date">To</label><input id="end-date" name="end_date" type="date" required></div><button class="button" type="submit">Load trend</button></form>
+      <article class="card section-gap"><div class="card__header"><div><h2 id="trend-title">Daily reports</h2><p id="trend-summary">Choose a disease and date range to load report counts.</p></div></div><div id="trend-chart" class="chart"></div></article>
+      <p class="callout section-gap">Reported counts are not necessarily laboratory-confirmed cases. A trend pattern alone does not establish an outbreak.</p>
+    </div>
+  </main></div></body></html>
