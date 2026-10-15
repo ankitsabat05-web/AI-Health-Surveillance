@@ -1,0 +1,1202 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Report Symptoms | Health Surveillance System</title>
+
+    <style>
+        :root {
+            --primary: #087f8c;
+            --primary-dark: #06636d;
+            --background: #f4f8fb;
+            --surface: #ffffff;
+            --text: #172b4d;
+            --muted: #6b7c93;
+            --border: #dce5ed;
+            --success: #15803d;
+            --danger: #b91c1c;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: var(--background);
+            color: var(--text);
+        }
+
+        button,
+        input,
+        select,
+        textarea {
+            font: inherit;
+        }
+
+        .layout {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Sidebar */
+
+        .sidebar {
+            width: 245px;
+            flex-shrink: 0;
+            background: #102a43;
+            color: white;
+            padding: 25px 16px;
+        }
+
+        .brand {
+            font-size: 19px;
+            font-weight: 700;
+            line-height: 1.5;
+            padding: 8px 10px 30px;
+        }
+
+        .brand span {
+            color: #4dd0c8;
+        }
+
+        .brand small {
+            font-size: 11px;
+            font-weight: 400;
+            color: #bcccdc;
+        }
+
+        .nav-label {
+            font-size: 11px;
+            color: #9fb3c8;
+            letter-spacing: 1.5px;
+            padding: 10px;
+            margin-bottom: 8px;
+        }
+
+        .nav-link {
+            display: block;
+            color: #d9e2ec;
+            text-decoration: none;
+            padding: 13px 12px;
+            border-radius: 8px;
+            margin-bottom: 6px;
+            font-size: 14px;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            background: #214e65;
+            color: white;
+        }
+
+        .nav-link.active {
+            border-left: 3px solid #4dd0c8;
+        }
+
+        /* Main */
+
+        .main {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .topbar {
+            background: var(--surface);
+            padding: 20px 32px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .topbar h2 {
+            font-size: 20px;
+        }
+
+        .topbar p {
+            color: var(--muted);
+            font-size: 13px;
+        }
+
+        .content {
+            max-width: 1050px;
+            margin: auto;
+            padding: 30px;
+        }
+
+        .page-heading {
+            margin-bottom: 24px;
+        }
+
+        .page-heading h1 {
+            font-size: 28px;
+            margin-bottom: 9px;
+        }
+
+        .page-heading p {
+            color: var(--muted);
+            font-size: 14px;
+            line-height: 1.7;
+        }
+
+        /* Notice */
+
+        .notice {
+            padding: 16px 18px;
+            background: #eaf8ff;
+            color: #075985;
+            border: 1px solid #bae6fd;
+            border-radius: 9px;
+            font-size: 13px;
+            line-height: 1.7;
+            margin-bottom: 22px;
+        }
+
+        .notice strong {
+            display: block;
+            margin-bottom: 3px;
+        }
+
+        .emergency-notice {
+            background: #fff1f2;
+            color: #9f1239;
+            border-color: #fecdd3;
+        }
+
+        /* Form */
+
+        .form-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 13px;
+            overflow: hidden;
+        }
+
+        .section-heading {
+            padding: 23px 26px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .section-heading h2 {
+            font-size: 18px;
+            margin-bottom: 7px;
+        }
+
+        .section-heading p {
+            font-size: 13px;
+            color: var(--muted);
+            line-height: 1.6;
+        }
+
+        form {
+            padding: 26px;
+        }
+
+        .form-section {
+            margin-bottom: 30px;
+        }
+
+        .form-section h3 {
+            font-size: 15px;
+            margin-bottom: 19px;
+            padding-bottom: 11px;
+            border-bottom: 1px solid #edf1f5;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 20px;
+        }
+
+        .form-group {
+            min-width: 0;
+        }
+
+        .full-width {
+            grid-column: 1 / -1;
+        }
+
+        label,
+        .field-label {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .required {
+            color: var(--danger);
+        }
+
+        input,
+        select,
+        textarea {
+            width: 100%;
+            border: 1px solid #cbd5e1;
+            background: white;
+            color: var(--text);
+            padding: 12px 13px;
+            border-radius: 7px;
+            outline: none;
+            font-size: 13px;
+        }
+
+        input:focus,
+        select:focus,
+        textarea:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(8, 127, 140, 0.12);
+        }
+
+        input:disabled,
+        select:disabled,
+        textarea:disabled {
+            background: #f1f5f9;
+            cursor: not-allowed;
+        }
+
+        textarea {
+            min-height: 110px;
+            resize: vertical;
+            line-height: 1.6;
+        }
+
+        .help-text {
+            color: var(--muted);
+            font-size: 11px;
+            line-height: 1.6;
+            margin-top: 7px;
+        }
+
+        /* Symptom selection */
+
+        .symptom-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 10px;
+        }
+
+        .symptom-option {
+            display: flex;
+            align-items: center;
+            gap: 9px;
+            padding: 12px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: 400;
+            line-height: 1.5;
+            margin: 0;
+        }
+
+        .symptom-option:hover {
+            background: #f0fdfa;
+            border-color: var(--primary);
+        }
+
+        .symptom-option input {
+            width: 16px;
+            height: 16px;
+            flex-shrink: 0;
+            accent-color: var(--primary);
+        }
+
+        .selected-count {
+            font-size: 12px;
+            color: var(--muted);
+            margin-top: 12px;
+        }
+
+        /* Consent */
+
+        .consent-box {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            font-size: 12px;
+            line-height: 1.7;
+            color: #475569;
+        }
+
+        .consent-box input {
+            width: 16px;
+            height: 16px;
+            margin-top: 3px;
+            flex-shrink: 0;
+            accent-color: var(--primary);
+        }
+
+        .consent-box label {
+            margin: 0;
+            font-weight: 400;
+        }
+
+        /* Buttons */
+
+        .form-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 12px;
+            padding-top: 22px;
+            border-top: 1px solid var(--border);
+        }
+
+        .btn {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            border-radius: 7px;
+            padding: 12px 18px;
+            border: 1px solid transparent;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+        }
+
+        .btn-secondary {
+            background: white;
+            border-color: var(--border);
+            color: var(--text);
+        }
+
+        .btn:disabled {
+            opacity: 0.65;
+            cursor: wait;
+        }
+
+        /* Feedback */
+
+        .feedback {
+            display: none;
+            padding: 14px 16px;
+            border-radius: 8px;
+            margin-bottom: 22px;
+            font-size: 13px;
+            line-height: 1.7;
+        }
+
+        .feedback.success {
+            display: block;
+            background: #dcfce7;
+            color: #166534;
+            border: 1px solid #bbf7d0;
+        }
+
+        .feedback.error {
+            display: block;
+            background: #fee2e2;
+            color: #991b1b;
+            border: 1px solid #fecaca;
+        }
+
+        .feedback.info {
+            display: block;
+            background: #e0f2fe;
+            color: #075985;
+            border: 1px solid #bae6fd;
+        }
+
+        .footer-note {
+            margin-top: 22px;
+            color: var(--muted);
+            font-size: 11px;
+            line-height: 1.7;
+            text-align: center;
+        }
+
+        @media (max-width: 850px) {
+            .sidebar {
+                width: 200px;
+            }
+
+            .content {
+                padding: 22px;
+            }
+
+            .symptom-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+
+        @media (max-width: 600px) {
+            .layout {
+                display: block;
+            }
+
+            .sidebar {
+                width: 100%;
+                padding: 14px;
+            }
+
+            .brand {
+                padding: 8px 5px 15px;
+            }
+
+            .nav-label {
+                display: none;
+            }
+
+            .sidebar nav {
+                display: flex;
+                gap: 5px;
+                overflow-x: auto;
+            }
+
+            .nav-link {
+                white-space: nowrap;
+                margin-bottom: 0;
+                padding: 10px;
+            }
+
+            .topbar {
+                padding: 17px;
+            }
+
+            .content {
+                padding: 18px 12px;
+            }
+
+            .page-heading h1 {
+                font-size: 23px;
+            }
+
+            .section-heading,
+            form {
+                padding: 19px 15px;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .full-width {
+                grid-column: auto;
+            }
+
+            .symptom-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 8px;
+            }
+
+            .symptom-option {
+                padding: 10px 8px;
+            }
+
+            .form-actions {
+                flex-direction: column-reverse;
+            }
+
+            .form-actions .btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="layout">
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+
+        <div class="brand">
+            HEALTH<span>GUARD</span><br>
+            <small>Health Surveillance System</small>
+        </div>
+
+        <div class="nav-label">USER PORTAL</div>
+
+        <nav>
+            <a class="nav-link" href="dashboard.html">Dashboard</a>
+
+            <a class="nav-link active"
+               href="report-health.html"
+               aria-current="page">
+                Report Symptoms
+            </a>
+
+            <a class="nav-link" href="report-history.html">
+                Report History
+            </a>
+
+            <a class="nav-link" href="profile.html">
+                My Profile
+            </a>
+        </nav>
+
+    </aside>
+
+    <!-- Main content -->
+    <main class="main">
+
+        <header class="topbar">
+            <h2>Submit Health Report</h2>
+            <p>Preventive Healthcare Portal</p>
+        </header>
+
+        <div class="content">
+
+            <div class="page-heading">
+                <h1>Report Your Symptoms</h1>
+
+                <p>
+                    Submit information about your current symptoms to support
+                    preliminary assessment and public health surveillance.
+                </p>
+            </div>
+
+            <div class="notice">
+                <strong>How this works</strong>
+                Enter your symptoms and relevant information. Your report can
+                be used for preliminary health assessment and, where
+                authorized, aggregated disease surveillance.
+            </div>
+
+            <div class="notice emergency-notice">
+                <strong>Medical emergency?</strong>
+                Do not wait for an online assessment. Seek emergency medical
+                assistance immediately if you experience severe breathing
+                difficulty, chest pain, loss of consciousness, or other
+                potentially life-threatening symptoms.
+            </div>
+
+            <div id="feedback" class="feedback"
+                 role="status" aria-live="polite"></div>
+
+            <section class="form-card">
+
+                <div class="section-heading">
+                    <h2>Health Information Form</h2>
+
+                    <p>
+                        Fields marked with <span class="required">*</span>
+                        are required.
+                    </p>
+                </div>
+
+                <form id="healthReportForm">
+
+                    <!-- Section 1 -->
+                    <section class="form-section">
+
+                        <h3>1. Basic Information</h3>
+
+                        <div class="form-grid">
+
+                            <div class="form-group">
+                                <label for="age">
+                                    Age <span class="required">*</span>
+                                </label>
+
+                                <input
+                                    type="number"
+                                    id="age"
+                                    name="age"
+                                    min="0"
+                                    max="120"
+                                    step="1"
+                                    required
+                                    placeholder="Enter your age"
+                                >
+                            </div>
+
+                            <div class="form-group">
+                                <label for="sex">Sex (optional)</label>
+
+                                <select id="sex" name="sex">
+                                    <option value="">Prefer not to say</option>
+                                    <option value="female">Female</option>
+                                    <option value="male">Male</option>
+                                    <option value="intersex">Intersex</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+
+                        </div>
+
+                    </section>
+
+                    <!-- Section 2 -->
+                    <section class="form-section">
+
+                        <h3>2. Symptoms</h3>
+
+                        <div class="form-group">
+
+                            <span class="field-label">
+                                Select all symptoms you currently experience
+                                <span class="required">*</span>
+                            </span>
+
+                            <div class="symptom-grid">
+
+                                <label class="symptom-option">
+                                    <input type="checkbox"
+                                           name="symptoms"
+                                           value="fever">
+                                    Fever
+                                </label>
+
+                                <label class="symptom-option">
+                                    <input type="checkbox"
+                                           name="symptoms"
+                                           value="cough">
+                                    Cough
+                                </label>
+
+                                <label class="symptom-option">
+                                    <input type="checkbox"
+                                           name="symptoms"
+                                           value="fatigue">
+                                    Fatigue or weakness
+                                </label>
+
+                                <label class="symptom-option">
+                                    <input type="checkbox"
+                                           name="symptoms"
+                                           value="headache">
+                                    Headache
+                                </label>
+
+                                <label class="symptom-option">
+                                    <input type="checkbox"
+                                           name="symptoms"
+                                           value="sore_throat">
+                                    Sore throat
+                                </label>
+
+                                <label class="symptom-option">
+                                    <input type="checkbox"
+                                           name="symptoms"
+                                           value="breathing_difficulty">
+                                    Breathing difficulty
+                                </label>
+
+                                <label class="symptom-option">
+                                    <input type="checkbox"
+                                           name="symptoms"
+                                           value="nausea">
+                                    Nausea or vomiting
+                                </label>
+
+                                <label class="symptom-option">
+                                    <input type="checkbox"
+                                           name="symptoms"
+                                           value="diarrhea">
+                                    Diarrhea
+                                </label>
+
+                                <label class="symptom-option">
+                                    <input type="checkbox"
+                                           name="symptoms"
+                                           value="body_pain">
+                                    Body or muscle pain
+                                </label>
+
+                                <label class="symptom-option">
+                                    <input type="checkbox"
+                                           name="symptoms"
+                                           value="skin_rash">
+                                    Skin rash
+                                </label>
+
+                                <label class="symptom-option">
+                                    <input type="checkbox"
+                                           name="symptoms"
+                                           value="loss_of_appetite">
+                                    Loss of appetite
+                                </label>
+
+                                <label class="symptom-option">
+                                    <input type="checkbox"
+                                           name="symptoms"
+                                           value="other">
+                                    Other symptoms
+                                </label>
+
+                            </div>
+
+                            <p class="selected-count" id="symptomCount">
+                                0 symptoms selected
+                            </p>
+
+                        </div>
+
+                        <div class="form-grid" style="margin-top:22px;">
+
+                            <div class="form-group">
+                                <label for="duration">
+                                    Symptom Duration
+                                    <span class="required">*</span>
+                                </label>
+
+                                <select id="duration"
+                                        name="duration"
+                                        required>
+                                    <option value="">Select duration</option>
+                                    <option value="less_than_24_hours">
+                                        Less than 24 hours
+                                    </option>
+                                    <option value="1_3_days">
+                                        1–3 days
+                                    </option>
+                                    <option value="4_7_days">
+                                        4–7 days
+                                    </option>
+                                    <option value="more_than_7_days">
+                                        More than 7 days
+                                    </option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="severity">
+                                    Perceived Severity
+                                    <span class="required">*</span>
+                                </label>
+
+                                <select id="severity"
+                                        name="severity"
+                                        required>
+                                    <option value="">Select severity</option>
+                                    <option value="mild">Mild</option>
+                                    <option value="moderate">Moderate</option>
+                                    <option value="severe">Severe</option>
+                                </select>
+
+                                <p class="help-text">
+                                    This is your own description, not an
+                                    AI-generated medical risk score.
+                                </p>
+                            </div>
+
+                            <div class="form-group full-width">
+                                <label for="otherSymptoms">
+                                    Additional Symptom Details
+                                </label>
+
+                                <textarea
+                                    id="otherSymptoms"
+                                    name="other_symptoms"
+                                    maxlength="1000"
+                                    placeholder="Describe other symptoms, when they started, or any relevant details."
+                                ></textarea>
+
+                                <p class="help-text">
+                                    Do not include your name, phone number,
+                                    government ID, or other unnecessary
+                                    identifying information.
+                                </p>
+                            </div>
+
+                        </div>
+
+                    </section>
+
+                    <!-- Section 3 -->
+                    <section class="form-section">
+
+                        <h3>3. Location Information</h3>
+
+                        <p class="help-text" style="margin-bottom:18px;">
+                            Location helps authorized public health officials
+                            identify geographical trends. Provide only the
+                            location detail needed for surveillance.
+                        </p>
+
+                        <div class="form-grid">
+
+                            <div class="form-group">
+                                <label for="state">
+                                    State / Union Territory
+                                    <span class="required">*</span>
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="state"
+                                    name="state"
+                                    maxlength="100"
+                                    required
+                                    autocomplete="address-level1"
+                                    placeholder="e.g. Maharashtra"
+                                >
+                            </div>
+
+                            <div class="form-group">
+                                <label for="district">
+                                    District <span class="required">*</span>
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="district"
+                                    name="district"
+                                    maxlength="100"
+                                    required
+                                    autocomplete="address-level2"
+                                    placeholder="Enter district"
+                                >
+                            </div>
+
+                            <div class="form-group full-width">
+                                <label for="region">
+                                    City / Area
+                                    <span class="required">*</span>
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="region"
+                                    name="region"
+                                    maxlength="150"
+                                    required
+                                    placeholder="Enter city or general area"
+                                >
+
+                                <p class="help-text">
+                                    Do not enter your complete residential
+                                    address.
+                                </p>
+                            </div>
+
+                        </div>
+
+                    </section>
+
+                    <!-- Section 4 -->
+                    <section class="form-section">
+
+                        <h3>4. Relevant Health Information</h3>
+
+                        <div class="form-grid">
+
+                            <div class="form-group">
+                                <label for="existingConditions">
+                                    Existing Health Conditions (optional)
+                                </label>
+
+                                <textarea
+                                    id="existingConditions"
+                                    name="existing_conditions"
+                                    maxlength="500"
+                                    placeholder="Provide only relevant information."
+                                ></textarea>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="exposure">
+                                    Known Contact or Exposure (optional)
+                                </label>
+
+                                <textarea
+                                    id="exposure"
+                                    name="exposure"
+                                    maxlength="500"
+                                    placeholder="For example, known contact with someone experiencing similar symptoms."
+                                ></textarea>
+                            </div>
+
+                        </div>
+
+                    </section>
+
+                    <!-- Consent -->
+                    <section class="form-section">
+
+                        <h3>5. Privacy and Consent</h3>
+
+                        <div class="consent-box">
+
+                            <input
+                                type="checkbox"
+                                id="consent"
+                                name="consent"
+                                required
+                            >
+
+                            <label for="consent">
+                                I confirm that the information provided is
+                                accurate to the best of my knowledge. I
+                                understand that this report may be processed
+                                for the stated healthcare and public health
+                                surveillance purposes in accordance with the
+                                applicable privacy notice and data protection
+                                requirements.
+                                <span class="required">*</span>
+                            </label>
+
+                        </div>
+
+                    </section>
+
+                    <!-- Actions -->
+                    <div class="form-actions">
+
+                        <button type="reset" class="btn btn-secondary">
+                            Clear Form
+                        </button>
+
+                        <button type="submit"
+                                id="submitBtn"
+                                class="btn btn-primary">
+                            Submit Health Report
+                        </button>
+
+                    </div>
+
+                </form>
+
+            </section>
+
+            <p class="footer-note">
+                Your health information should be protected and accessible
+                only to authorized personnel. AI assessments are preliminary
+                and must not replace professional medical evaluation.
+            </p>
+
+        </div>
+
+    </main>
+
+</div>
+
+<script>
+    /*
+     * DEMO_MODE = true:
+     * Validates the form and displays a demo confirmation.
+     * It does NOT save the report to the database.
+     *
+     * DEMO_MODE = false:
+     * Sends the report to the FastAPI backend.
+     */
+
+    const DEMO_MODE = true;
+
+    const API_BASE_URL = "http://127.0.0.1:8000";
+
+    const form = document.getElementById("healthReportForm");
+    const submitBtn = document.getElementById("submitBtn");
+    const feedback = document.getElementById("feedback");
+
+    const symptomCheckboxes = [
+        ...document.querySelectorAll('input[name="symptoms"]')
+    ];
+
+    function updateSymptomCount() {
+        const count = symptomCheckboxes.filter(
+            checkbox => checkbox.checked
+        ).length;
+
+        document.getElementById("symptomCount").textContent =
+            `${count} symptom${count === 1 ? "" : "s"} selected`;
+    }
+
+    symptomCheckboxes.forEach(checkbox => {
+        checkbox.addEventListener("change", updateSymptomCount);
+    });
+
+    function showFeedback(message, type) {
+        feedback.className = `feedback ${type}`;
+        feedback.textContent = message;
+
+        feedback.scrollIntoView({
+            behavior: "smooth",
+            block: "center"
+        });
+    }
+
+    function getFormData() {
+        const formData = new FormData(form);
+
+        const symptoms = formData.getAll("symptoms");
+
+        return {
+            age: Number(formData.get("age")),
+            sex: formData.get("sex") || null,
+
+            symptoms: symptoms,
+
+            duration: formData.get("duration"),
+            severity: formData.get("severity"),
+
+            other_symptoms:
+                formData.get("other_symptoms").trim(),
+
+            state: formData.get("state").trim(),
+            district: formData.get("district").trim(),
+            region: formData.get("region").trim(),
+
+            existing_conditions:
+                formData.get("existing_conditions").trim(),
+
+            exposure: formData.get("exposure").trim(),
+
+            consent: formData.get("consent") === "on"
+        };
+    }
+
+    function validateReport(data) {
+        if (!Number.isInteger(data.age) ||
+            data.age < 0 ||
+            data.age > 120) {
+            return "Please enter a valid age between 0 and 120.";
+        }
+
+        if (data.symptoms.length === 0) {
+            return "Please select at least one symptom.";
+        }
+
+        if (!data.duration || !data.severity) {
+            return "Please select symptom duration and severity.";
+        }
+
+        if (!data.state || !data.district || !data.region) {
+            return "Please complete the required location fields.";
+        }
+
+        if (!data.consent) {
+            return "Please confirm the consent statement before submitting.";
+        }
+
+        return null;
+    }
+
+    form.addEventListener("reset", () => {
+        setTimeout(() => {
+            updateSymptomCount();
+
+            feedback.className = "feedback";
+            feedback.textContent = "";
+        }, 0);
+    });
+
+    form.addEventListener("submit", async event => {
+        event.preventDefault();
+
+        feedback.className = "feedback";
+        feedback.textContent = "";
+
+        if (!form.reportValidity()) {
+            return;
+        }
+
+        const reportData = getFormData();
+        const validationError = validateReport(reportData);
+
+        if (validationError) {
+            showFeedback(validationError, "error");
+            return;
+        }
+
+        submitBtn.disabled = true;
+        submitBtn.textContent = "Submitting...";
+
+        try {
+            if (DEMO_MODE) {
+                /*
+                 * Demo mode deliberately avoids storing health data
+                 * in localStorage or sending it to an external service.
+                 */
+
+                await new Promise(resolve => setTimeout(resolve, 400));
+
+                showFeedback(
+                    "Demo submission successful. No report was saved to a database. Connect the FastAPI endpoint to enable actual submissions.",
+                    "success"
+                );
+
+                form.reset();
+                return;
+            }
+
+            /*
+             * Replace the endpoint below with the actual route in
+             * your FastAPI backend.
+             *
+             * This example assumes authentication uses a secure,
+             * same-site session cookie.
+             */
+
+            const response = await fetch(
+                `${API_BASE_URL}/api/health/reports`,
+                {
+                    method: "POST",
+                    credentials: "include",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Accept": "application/json"
+                    },
+                    body: JSON.stringify(reportData)
+                }
+            );
+
+            const result = await response.json().catch(() => ({}));
+
+            if (!response.ok) {
+                if (response.status === 401) {
+                    throw new Error(
+                        "Please log in before submitting a health report."
+                    );
+                }
+
+                if (response.status === 422) {
+                    throw new Error(
+                        "The report data was rejected. Check the required fields and backend schema."
+                    );
+                }
+
+                throw new Error(
+                    result.detail || "Unable to submit the report."
+                );
+            }
+
+            showFeedback(
+                "Your health report has been submitted successfully. " +
+                "Report ID: " + (result.id ?? result.report_id ?? "Created") +
+                ". You can check its status in Report History.",
+                "success"
+            );
+
+            form.reset();
+
+        } catch (error) {
+            console.error("Health report submission failed:", error);
+
+            showFeedback(
+                error.message ||
+                "A connection error occurred. Please try again.",
+                "error"
+            );
+
+        } finally {
+            submitBtn.disabled = false;
+            submitBtn.textContent = "Submit Health Report";
+        }
+    });
+</script>
+
+</body>
+</html>
+```

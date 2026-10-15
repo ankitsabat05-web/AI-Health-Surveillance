@@ -1,0 +1,1574 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>My Profile | HealthGuard</title>
+
+    <style>
+        :root {
+            --primary: #087f8c;
+            --primary-dark: #06636d;
+            --background: #f4f8fb;
+            --surface: #ffffff;
+            --text: #172b4d;
+            --muted: #6b7c93;
+            --border: #dce5ed;
+            --success: #15803d;
+            --danger: #b91c1c;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: var(--background);
+            color: var(--text);
+        }
+
+        button,
+        input,
+        select {
+            font: inherit;
+        }
+
+        .layout {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Sidebar */
+
+        .sidebar {
+            width: 245px;
+            flex-shrink: 0;
+            background: #102a43;
+            color: white;
+            padding: 25px 16px;
+        }
+
+        .brand {
+            font-size: 19px;
+            font-weight: 700;
+            line-height: 1.5;
+            padding: 8px 10px 30px;
+        }
+
+        .brand span {
+            color: #4dd0c8;
+        }
+
+        .brand small {
+            font-size: 11px;
+            font-weight: 400;
+            color: #bcccdc;
+        }
+
+        .nav-label {
+            font-size: 11px;
+            color: #9fb3c8;
+            letter-spacing: 1.5px;
+            padding: 10px;
+            margin-bottom: 8px;
+        }
+
+        .nav-link {
+            display: block;
+            color: #d9e2ec;
+            text-decoration: none;
+            padding: 13px 12px;
+            border-radius: 8px;
+            margin-bottom: 6px;
+            font-size: 14px;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            background: #214e65;
+            color: white;
+        }
+
+        .nav-link.active {
+            border-left: 3px solid #4dd0c8;
+        }
+
+        /* Main layout */
+
+        .main {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .topbar {
+            background: var(--surface);
+            padding: 20px 32px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .topbar h2 {
+            font-size: 20px;
+        }
+
+        .topbar p {
+            font-size: 13px;
+            color: var(--muted);
+        }
+
+        .content {
+            max-width: 1150px;
+            margin: auto;
+            padding: 30px;
+        }
+
+        .page-heading {
+            margin-bottom: 25px;
+        }
+
+        .page-heading h1 {
+            font-size: 28px;
+            margin-bottom: 8px;
+        }
+
+        .page-heading p {
+            font-size: 14px;
+            color: var(--muted);
+            line-height: 1.7;
+        }
+
+        /* Profile summary */
+
+        .profile-banner {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 24px;
+        }
+
+        .avatar {
+            width: 76px;
+            height: 76px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #d9f3f0;
+            color: var(--primary-dark);
+            font-size: 27px;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        .profile-summary h2 {
+            font-size: 21px;
+            margin-bottom: 7px;
+            overflow-wrap: anywhere;
+        }
+
+        .profile-summary p {
+            font-size: 13px;
+            color: var(--muted);
+            margin-bottom: 7px;
+            overflow-wrap: anywhere;
+        }
+
+        .account-badge {
+            display: inline-block;
+            background: #dcfce7;
+            color: #166534;
+            border-radius: 20px;
+            padding: 5px 10px;
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        /* Cards */
+
+        .profile-grid {
+            display: grid;
+            grid-template-columns: minmax(0, 1.6fr) minmax(260px, 1fr);
+            gap: 22px;
+            align-items: start;
+        }
+
+        .card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            overflow: hidden;
+            margin-bottom: 22px;
+        }
+
+        .card-header {
+            padding: 21px 23px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .card-header h3 {
+            font-size: 16px;
+            margin-bottom: 6px;
+        }
+
+        .card-header p {
+            font-size: 12px;
+            line-height: 1.6;
+            color: var(--muted);
+        }
+
+        .card-body {
+            padding: 23px;
+        }
+
+        /* Form */
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 19px;
+        }
+
+        .form-group {
+            min-width: 0;
+        }
+
+        .full-width {
+            grid-column: 1 / -1;
+        }
+
+        label {
+            display: block;
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        input,
+        select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #cbd5e1;
+            border-radius: 7px;
+            background: white;
+            color: var(--text);
+            font-size: 13px;
+            outline: none;
+        }
+
+        input:focus,
+        select:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(8, 127, 140, 0.12);
+        }
+
+        input:disabled,
+        select:disabled {
+            background: #f1f5f9;
+            color: #64748b;
+            cursor: not-allowed;
+        }
+
+        .help-text {
+            font-size: 11px;
+            line-height: 1.6;
+            color: var(--muted);
+            margin-top: 7px;
+        }
+
+        .form-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            margin-top: 24px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border);
+        }
+
+        /* Buttons */
+
+        .btn {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            border: 1px solid transparent;
+            border-radius: 7px;
+            padding: 11px 15px;
+            font-size: 12px;
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+        }
+
+        .btn-secondary {
+            background: white;
+            border-color: var(--border);
+            color: var(--text);
+        }
+
+        .btn-danger {
+            background: white;
+            border-color: #fecaca;
+            color: var(--danger);
+        }
+
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: wait;
+        }
+
+        /* Settings */
+
+        .setting-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 15px;
+            padding: 17px 0;
+            border-bottom: 1px solid #edf1f5;
+        }
+
+        .setting-row:first-child {
+            padding-top: 0;
+        }
+
+        .setting-row:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .setting-info h4 {
+            font-size: 13px;
+            margin-bottom: 6px;
+        }
+
+        .setting-info p {
+            font-size: 11px;
+            color: var(--muted);
+            line-height: 1.6;
+        }
+
+        .toggle {
+            width: 42px;
+            height: 23px;
+            flex-shrink: 0;
+            position: relative;
+        }
+
+        .toggle input {
+            width: 1px;
+            height: 1px;
+            position: absolute;
+            opacity: 0;
+        }
+
+        .toggle-track {
+            position: absolute;
+            inset: 0;
+            background: #cbd5e1;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .toggle-track::before {
+            content: "";
+            position: absolute;
+            height: 17px;
+            width: 17px;
+            left: 3px;
+            top: 3px;
+            background: white;
+            border-radius: 50%;
+            transition: 0.2s;
+        }
+
+        .toggle input:checked + .toggle-track {
+            background: var(--primary);
+        }
+
+        .toggle input:checked + .toggle-track::before {
+            transform: translateX(19px);
+        }
+
+        .toggle input:focus-visible + .toggle-track {
+            outline: 3px solid #7dd3fc;
+            outline-offset: 3px;
+        }
+
+        /* Information rows */
+
+        .info-row {
+            padding: 13px 0;
+            border-bottom: 1px solid #edf1f5;
+        }
+
+        .info-row:first-child {
+            padding-top: 0;
+        }
+
+        .info-row:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .info-label {
+            display: block;
+            color: var(--muted);
+            font-size: 11px;
+            margin-bottom: 6px;
+        }
+
+        .info-value {
+            font-size: 13px;
+            font-weight: 600;
+            overflow-wrap: anywhere;
+        }
+
+        /* Feedback */
+
+        .feedback {
+            display: none;
+            padding: 13px 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-size: 13px;
+            line-height: 1.6;
+        }
+
+        .feedback.success {
+            display: block;
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        .feedback.error {
+            display: block;
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        .feedback.info {
+            display: block;
+            background: #e0f2fe;
+            color: #075985;
+        }
+
+        .privacy-note {
+            background: #f0fdfa;
+            border: 1px solid #ccfbf1;
+            border-radius: 9px;
+            padding: 15px;
+            color: #115e59;
+            font-size: 12px;
+            line-height: 1.7;
+        }
+
+        .danger-zone {
+            border-color: #fecaca;
+        }
+
+        .danger-zone .card-header {
+            background: #fff7f7;
+        }
+
+        @media (max-width: 950px) {
+            .sidebar {
+                width: 200px;
+            }
+
+            .profile-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .layout {
+                display: block;
+            }
+
+            .sidebar {
+                width: 100%;
+                padding: 14px;
+            }
+
+            .brand {
+                padding: 8px 5px 15px;
+            }
+
+            .nav-label {
+                display: none;
+            }
+
+            .sidebar nav {
+                display: flex;
+                gap: 5px;
+                overflow-x: auto;
+            }
+
+            .nav-link {
+                white-space: nowrap;
+                margin-bottom: 0;
+                padding: 10px;
+            }
+
+            .topbar {
+                padding: 17px;
+            }
+
+            .content {
+                padding: 18px 12px;
+            }
+
+            .page-heading h1 {
+                font-size: 23px;
+            }
+
+            .profile-banner {
+                padding: 18px;
+                gap: 14px;
+            }
+
+            .avatar {
+                width: 60px;
+                height: 60px;
+                font-size: 22px;
+            }
+
+            .profile-summary h2 {
+                font-size: 17px;
+            }
+
+            .card-header,
+            .card-body {
+                padding: 18px 15px;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .full-width {
+                grid-column: auto;
+            }
+
+            .form-actions {
+                flex-direction: column-reverse;
+            }
+
+            .form-actions .btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="layout">
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+
+        <div class="brand">
+            HEALTH<span>GUARD</span><br>
+            <small>Health Surveillance System</small>
+        </div>
+
+        <div class="nav-label">USER PORTAL</div>
+
+        <nav>
+            <a class="nav-link" href="dashboard.html">Dashboard</a>
+
+            <a class="nav-link" href="report-health.html">
+                Report Symptoms
+            </a>
+
+            <a class="nav-link" href="report-history.html">
+                Report History
+            </a>
+
+            <a class="nav-link active"
+               href="profile.html"
+               aria-current="page">
+                My Profile
+            </a>
+        </nav>
+
+    </aside>
+
+    <!-- Main content -->
+    <main class="main">
+
+        <header class="topbar">
+            <h2>My Profile</h2>
+            <p>Account & Privacy Settings</p>
+        </header>
+
+        <div class="content">
+
+            <div class="page-heading">
+                <h1>Account Settings</h1>
+
+                <p>
+                    Manage your account information, security settings,
+                    and health data preferences.
+                </p>
+            </div>
+
+            <div id="feedback"
+                 class="feedback"
+                 role="status"
+                 aria-live="polite"></div>
+
+            <!-- Profile banner -->
+            <section class="profile-banner">
+
+                <div class="avatar" id="avatarInitials">U</div>
+
+                <div class="profile-summary">
+                    <h2 id="displayName">Loading profile...</h2>
+                    <p id="displayEmail">Account information</p>
+                    <span class="account-badge" id="accountStatus">
+                        Checking account
+                    </span>
+                </div>
+
+            </section>
+
+            <div class="profile-grid">
+
+                <!-- Left column -->
+                <div>
+
+                    <!-- Personal information -->
+                    <section class="card">
+
+                        <div class="card-header">
+                            <h3>Personal Information</h3>
+
+                            <p>
+                                Update the information associated with
+                                your account.
+                            </p>
+                        </div>
+
+                        <div class="card-body">
+
+                            <form id="profileForm">
+
+                                <div class="form-grid">
+
+                                    <div class="form-group">
+                                        <label for="fullName">
+                                            Full Name
+                                        </label>
+
+                                        <input
+                                            type="text"
+                                            id="fullName"
+                                            name="full_name"
+                                            minlength="2"
+                                            maxlength="100"
+                                            autocomplete="name"
+                                            required
+                                            disabled
+                                        >
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="email">
+                                            Email Address
+                                        </label>
+
+                                        <input
+                                            type="email"
+                                            id="email"
+                                            name="email"
+                                            maxlength="254"
+                                            autocomplete="email"
+                                            disabled
+                                        >
+
+                                        <p class="help-text">
+                                            Email changes may require
+                                            separate verification.
+                                        </p>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="phone">
+                                            Phone Number (optional)
+                                        </label>
+
+                                        <input
+                                            type="tel"
+                                            id="phone"
+                                            name="phone"
+                                            maxlength="20"
+                                            autocomplete="tel"
+                                            placeholder="Enter phone number"
+                                            disabled
+                                        >
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="dateOfBirth">
+                                            Date of Birth (optional)
+                                        </label>
+
+                                        <input
+                                            type="date"
+                                            id="dateOfBirth"
+                                            name="date_of_birth"
+                                            autocomplete="bday"
+                                            disabled
+                                        >
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="state">
+                                            State / Union Territory
+                                        </label>
+
+                                        <input
+                                            type="text"
+                                            id="state"
+                                            name="state"
+                                            maxlength="100"
+                                            disabled
+                                        >
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="district">
+                                            District
+                                        </label>
+
+                                        <input
+                                            type="text"
+                                            id="district"
+                                            name="district"
+                                            maxlength="100"
+                                            disabled
+                                        >
+                                    </div>
+
+                                </div>
+
+                                <div class="form-actions">
+
+                                    <button
+                                        type="button"
+                                        class="btn btn-secondary"
+                                        id="editBtn"
+                                    >
+                                        Edit Profile
+                                    </button>
+
+                                    <button
+                                        type="button"
+                                        class="btn btn-secondary"
+                                        id="cancelBtn"
+                                        hidden
+                                    >
+                                        Cancel
+                                    </button>
+
+                                    <button
+                                        type="submit"
+                                        class="btn btn-primary"
+                                        id="saveBtn"
+                                        hidden
+                                    >
+                                        Save Changes
+                                    </button>
+
+                                </div>
+
+                            </form>
+
+                        </div>
+
+                    </section>
+
+                    <!-- Privacy preferences -->
+                    <section class="card">
+
+                        <div class="card-header">
+                            <h3>Privacy Preferences</h3>
+
+                            <p>
+                                Manage optional communication and
+                                data-sharing preferences.
+                            </p>
+                        </div>
+
+                        <div class="card-body">
+
+                            <div class="setting-row">
+
+                                <div class="setting-info">
+                                    <h4>Health Notifications</h4>
+
+                                    <p>
+                                        Receive optional health updates
+                                        and reminders.
+                                    </p>
+                                </div>
+
+                                <label class="toggle"
+                                       aria-label="Health notifications">
+                                    <input
+                                        type="checkbox"
+                                        id="healthNotifications"
+                                    >
+                                    <span class="toggle-track"></span>
+                                </label>
+
+                            </div>
+
+                            <div class="setting-row">
+
+                                <div class="setting-info">
+                                    <h4>Research Data Contribution</h4>
+
+                                    <p>
+                                        Optional permission for eligible
+                                        de-identified data to be used in
+                                        approved public health research.
+                                    </p>
+                                </div>
+
+                                <label class="toggle"
+                                       aria-label="Research data contribution">
+                                    <input
+                                        type="checkbox"
+                                        id="researchConsent"
+                                    >
+                                    <span class="toggle-track"></span>
+                                </label>
+
+                            </div>
+
+                            <button
+                                type="button"
+                                class="btn btn-primary"
+                                id="savePreferencesBtn"
+                                style="margin-top:22px;"
+                            >
+                                Save Preferences
+                            </button>
+
+                            <p class="help-text" style="margin-top:12px;">
+                                These preferences are illustrative until
+                                connected to the backend. Essential
+                                security and legally required processing
+                                are not controlled by these switches.
+                            </p>
+
+                        </div>
+
+                    </section>
+
+                </div>
+
+                <!-- Right column -->
+                <div>
+
+                    <!-- Account information -->
+                    <section class="card">
+
+                        <div class="card-header">
+                            <h3>Account Overview</h3>
+
+                            <p>Your account details.</p>
+                        </div>
+
+                        <div class="card-body">
+
+                            <div class="info-row">
+                                <span class="info-label">
+                                    Account ID
+                                </span>
+
+                                <span class="info-value" id="accountId">
+                                    Loading...
+                                </span>
+                            </div>
+
+                            <div class="info-row">
+                                <span class="info-label">
+                                    Account Role
+                                </span>
+
+                                <span class="info-value" id="accountRole">
+                                    Loading...
+                                </span>
+                            </div>
+
+                            <div class="info-row">
+                                <span class="info-label">
+                                    Account Created
+                                </span>
+
+                                <span class="info-value" id="createdAt">
+                                    Not available
+                                </span>
+                            </div>
+
+                        </div>
+
+                    </section>
+
+                    <!-- Security -->
+                    <section class="card">
+
+                        <div class="card-header">
+                            <h3>Account Security</h3>
+
+                            <p>Manage your login security.</p>
+                        </div>
+
+                        <div class="card-body">
+
+                            <div class="setting-row">
+
+                                <div class="setting-info">
+                                    <h4>Password</h4>
+
+                                    <p>
+                                        Keep your account protected with
+                                        a strong, unique password.
+                                    </p>
+                                </div>
+
+                            </div>
+
+                            <button
+                                type="button"
+                                class="btn btn-secondary"
+                                id="changePasswordBtn"
+                                style="width:100%;margin-top:15px;"
+                            >
+                                Change Password
+                            </button>
+
+                            <button
+                                type="button"
+                                class="btn btn-secondary"
+                                id="logoutBtn"
+                                style="width:100%;margin-top:10px;"
+                            >
+                                Log Out
+                            </button>
+
+                            <p class="help-text" style="margin-top:12px;">
+                                Password changes and logout must be
+                                handled by authenticated backend routes.
+                            </p>
+
+                        </div>
+
+                    </section>
+
+                    <!-- Danger zone -->
+                    <section class="card danger-zone">
+
+                        <div class="card-header">
+                            <h3>Account Management</h3>
+
+                            <p>
+                                Manage your account access and data requests.
+                            </p>
+                        </div>
+
+                        <div class="card-body">
+
+                            <p style="font-size:12px;line-height:1.7;color:#64748b;">
+                                You may request access to your personal
+                                information or request account deletion,
+                                subject to applicable legal and public
+                                health record-retention requirements.
+                            </p>
+
+                            <button
+                                type="button"
+                                class="btn btn-danger"
+                                id="deleteAccountBtn"
+                                style="width:100%;margin-top:16px;"
+                            >
+                                Request Account Deletion
+                            </button>
+
+                        </div>
+
+                    </section>
+
+                    <div class="privacy-note">
+                        <strong>Your privacy matters.</strong><br>
+
+                        Health reports should be visible only to their
+                        owners and authorized personnel. Public health
+                        dashboards should use appropriately aggregated
+                        information rather than exposing individual
+                        patient records.
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </main>
+
+</div>
+
+<script>
+    /*
+     * DEMO MODE
+     *
+     * Demo mode uses fictional account information and does not save
+     * changes to a server or browser storage.
+     *
+     * Disable demo mode only after implementing the corresponding
+     * authenticated FastAPI endpoints.
+     */
+
+    const DEMO_MODE = true;
+
+    const API_BASE_URL = "http://127.0.0.1:8000";
+
+    const feedback = document.getElementById("feedback");
+    const profileForm = document.getElementById("profileForm");
+
+    const editBtn = document.getElementById("editBtn");
+    const cancelBtn = document.getElementById("cancelBtn");
+    const saveBtn = document.getElementById("saveBtn");
+
+    let profile = null;
+    let originalFormValues = null;
+    let editing = false;
+
+    const profileFields = [
+        "fullName",
+        "phone",
+        "dateOfBirth",
+        "state",
+        "district"
+    ];
+
+    const demoProfile = {
+        id: "DEMO-USER-001",
+        full_name: "Demo User",
+        email: "demo@example.com",
+        phone: "",
+        date_of_birth: "",
+        state: "",
+        district: "",
+        role: "user",
+        created_at: "2026-10-01T10:00:00",
+        preferences: {
+            health_notifications: false,
+            research_consent: false
+        }
+    };
+
+    function showFeedback(message, type = "info") {
+        feedback.className = `feedback ${type}`;
+        feedback.textContent = message;
+
+        feedback.scrollIntoView({
+            behavior: "smooth",
+            block: "nearest"
+        });
+    }
+
+    function clearFeedback() {
+        feedback.className = "feedback";
+        feedback.textContent = "";
+    }
+
+    function formatDate(value) {
+        if (!value) {
+            return "Not available";
+        }
+
+        const date = new Date(value);
+
+        if (Number.isNaN(date.getTime())) {
+            return "Not available";
+        }
+
+        return date.toLocaleDateString("en-IN", {
+            day: "2-digit",
+            month: "short",
+            year: "numeric"
+        });
+    }
+
+    function updateProfileSummary() {
+        const fullName = profile.full_name || "User";
+
+        document.getElementById("displayName").textContent = fullName;
+
+        document.getElementById("displayEmail").textContent =
+            profile.email || "Email not available";
+
+        document.getElementById("accountId").textContent =
+            profile.id || "Not available";
+
+        document.getElementById("accountRole").textContent =
+            profile.role === "user" ? "Registered User" : "Other";
+
+        document.getElementById("createdAt").textContent =
+            formatDate(profile.created_at);
+
+        document.getElementById("accountStatus").textContent =
+            "Account information loaded";
+
+        document.getElementById("avatarInitials").textContent =
+            fullName
+                .trim()
+                .split(/\s+/)
+                .slice(0, 2)
+                .map(part => part.charAt(0).toUpperCase())
+                .join("") || "U";
+    }
+
+    function populateForm(data) {
+        document.getElementById("fullName").value =
+            data.full_name || "";
+
+        document.getElementById("email").value =
+            data.email || "";
+
+        document.getElementById("phone").value =
+            data.phone || "";
+
+        document.getElementById("dateOfBirth").value =
+            data.date_of_birth || "";
+
+        document.getElementById("state").value =
+            data.state || "";
+
+        document.getElementById("district").value =
+            data.district || "";
+
+        document.getElementById("healthNotifications").checked =
+            Boolean(data.preferences?.health_notifications);
+
+        document.getElementById("researchConsent").checked =
+            Boolean(data.preferences?.research_consent);
+    }
+
+    function getEditableFormValues() {
+        return {
+            full_name: document.getElementById("fullName").value.trim(),
+            phone: document.getElementById("phone").value.trim(),
+            date_of_birth: document.getElementById("dateOfBirth").value,
+            state: document.getElementById("state").value.trim(),
+            district: document.getElementById("district").value.trim()
+        };
+    }
+
+    function setEditing(enabled) {
+        editing = enabled;
+
+        profileFields.forEach(id => {
+            document.getElementById(id).disabled = !enabled;
+        });
+
+        editBtn.hidden = enabled;
+        cancelBtn.hidden = !enabled;
+        saveBtn.hidden = !enabled;
+
+        document.getElementById("email").disabled = true;
+    }
+
+    function getDateLimit() {
+        const today = new Date();
+
+        const year = today.getFullYear();
+        const month = String(today.getMonth() + 1).padStart(2, "0");
+        const day = String(today.getDate()).padStart(2, "0");
+
+        return `${year}-${month}-${day}`;
+    }
+
+    document.getElementById("dateOfBirth").max = getDateLimit();
+
+    editBtn.addEventListener("click", () => {
+        clearFeedback();
+
+        originalFormValues = {
+            ...getEditableFormValues()
+        };
+
+        setEditing(true);
+
+        document.getElementById("fullName").focus();
+    });
+
+    cancelBtn.addEventListener("click", () => {
+        if (originalFormValues) {
+            populateForm({
+                ...profile,
+                ...originalFormValues
+            });
+        }
+
+        setEditing(false);
+        clearFeedback();
+    });
+
+    profileForm.addEventListener("submit", async event => {
+        event.preventDefault();
+        clearFeedback();
+
+        if (!editing) {
+            return;
+        }
+
+        if (!profileForm.reportValidity()) {
+            return;
+        }
+
+        const updatedProfile = getEditableFormValues();
+
+        if (updatedProfile.full_name.length < 2) {
+            showFeedback(
+                "Please enter a valid name containing at least two characters.",
+                "error"
+            );
+            return;
+        }
+
+        if (updatedProfile.date_of_birth) {
+            const selectedDate = new Date(
+                `${updatedProfile.date_of_birth}T00:00:00`
+            );
+
+            if (
+                Number.isNaN(selectedDate.getTime()) ||
+                selectedDate > new Date()
+            ) {
+                showFeedback(
+                    "Please enter a valid date of birth.",
+                    "error"
+                );
+                return;
+            }
+        }
+
+        saveBtn.disabled = true;
+        saveBtn.textContent = "Saving...";
+
+        try {
+            if (DEMO_MODE) {
+                /*
+                 * No personal information is persisted in demo mode.
+                 * The update is held in memory for this page session.
+                 */
+
+                profile = {
+                    ...profile,
+                    ...updatedProfile
+                };
+
+                updateProfileSummary();
+                populateForm(profile);
+                setEditing(false);
+
+                showFeedback(
+                    "Demo profile updated for this page session only. Changes have not been saved to a database.",
+                    "success"
+                );
+
+                return;
+            }
+
+            const response = await fetch(
+                `${API_BASE_URL}/api/auth/me`,
+                {
+                    method: "PATCH",
+                    credentials: "include",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Accept": "application/json"
+                    },
+                    body: JSON.stringify(updatedProfile)
+                }
+            );
+
+            const result = await response.json().catch(() => ({}));
+
+            if (!response.ok) {
+                if (response.status === 401) {
+                    throw new Error(
+                        "Your session has expired. Please log in again."
+                    );
+                }
+
+                throw new Error(
+                    result.detail || "Unable to update your profile."
+                );
+            }
+
+            profile = {
+                ...profile,
+                ...(result.user || result)
+            };
+
+            populateForm(profile);
+            updateProfileSummary();
+            setEditing(false);
+
+            showFeedback(
+                "Your profile has been updated successfully.",
+                "success"
+            );
+
+        } catch (error) {
+            showFeedback(
+                error.message || "An error occurred while saving your profile.",
+                "error"
+            );
+
+        } finally {
+            saveBtn.disabled = false;
+            saveBtn.textContent = "Save Changes";
+        }
+    });
+
+    document.getElementById("savePreferencesBtn")
+        .addEventListener("click", async () => {
+
+            clearFeedback();
+
+            const preferences = {
+                health_notifications:
+                    document.getElementById("healthNotifications").checked,
+
+                research_consent:
+                    document.getElementById("researchConsent").checked
+            };
+
+            try {
+                if (DEMO_MODE) {
+                    profile.preferences = preferences;
+
+                    showFeedback(
+                        "Preferences updated in demo memory only. They have not been saved to a database.",
+                        "success"
+                    );
+
+                    return;
+                }
+
+                const response = await fetch(
+                    `${API_BASE_URL}/api/auth/me/preferences`,
+                    {
+                        method: "PATCH",
+                        credentials: "include",
+                        headers: {
+                            "Content-Type": "application/json",
+                            "Accept": "application/json"
+                        },
+                        body: JSON.stringify(preferences)
+                    }
+                );
+
+                const result = await response.json().catch(() => ({}));
+
+                if (!response.ok) {
+                    throw new Error(
+                        result.detail || "Unable to save preferences."
+                    );
+                }
+
+                profile.preferences = preferences;
+
+                showFeedback(
+                    "Your privacy preferences have been saved.",
+                    "success"
+                );
+
+            } catch (error) {
+                showFeedback(
+                    error.message || "Unable to save preferences.",
+                    "error"
+                );
+            }
+        });
+
+    document.getElementById("changePasswordBtn")
+        .addEventListener("click", () => {
+            if (DEMO_MODE) {
+                showFeedback(
+                    "Password changes are not available in demo mode. Connect your authenticated password-reset or change-password endpoint.",
+                    "info"
+                );
+
+                return;
+            }
+
+            window.location.href = "change-password.html";
+        });
+
+    document.getElementById("logoutBtn")
+        .addEventListener("click", async () => {
+
+            clearFeedback();
+
+            if (DEMO_MODE) {
+                showFeedback(
+                    "Demo mode: no login session exists to terminate.",
+                    "info"
+                );
+
+                return;
+            }
+
+            const confirmed = window.confirm(
+                "Are you sure you want to log out?"
+            );
+
+            if (!confirmed) {
+                return;
+            }
+
+            try {
+                const response = await fetch(
+                    `${API_BASE_URL}/api/auth/logout`,
+                    {
+                        method: "POST",
+                        credentials: "include",
+                        headers: {
+                            "Accept": "application/json"
+                        }
+                    }
+                );
+
+                if (!response.ok) {
+                    throw new Error("Unable to log out.");
+                }
+
+                window.location.replace("login.html");
+
+            } catch (error) {
+                showFeedback(
+                    error.message || "Logout failed. Please try again.",
+                    "error"
+                );
+            }
+        });
+
+    document.getElementById("deleteAccountBtn")
+        .addEventListener("click", async () => {
+
+            clearFeedback();
+
+            const confirmed = window.confirm(
+                "Request account deletion? Health records may be subject to legal retention requirements. This action requires backend verification."
+            );
+
+            if (!confirmed) {
+                return;
+            }
+
+            if (DEMO_MODE) {
+                showFeedback(
+                    "Demo mode: no deletion request was sent. A real implementation should require re-authentication and securely process the request through the backend.",
+                    "info"
+                );
+
+                return;
+            }
+
+            showFeedback(
+                "Account deletion is not connected yet. Implement a verified deletion-request endpoint before enabling this feature.",
+                "info"
+            );
+        });
+
+    async function loadProfile() {
+        try {
+            if (DEMO_MODE) {
+                profile = {
+                    ...demoProfile,
+                    preferences: {
+                        ...demoProfile.preferences
+                    }
+                };
+            } else {
+                const response = await fetch(
+                    `${API_BASE_URL}/api/auth/me`,
+                    {
+                        method: "GET",
+                        credentials: "include",
+                        headers: {
+                            "Accept": "application/json"
+                        }
+                    }
+                );
+
+                if (!response.ok) {
+                    if (response.status === 401) {
+                        window.location.replace("login.html");
+                        return;
+                    }
+
+                    throw new Error("Unable to load your profile.");
+                }
+
+                const result = await response.json();
+
+                profile = result.user || result;
+            }
+
+            updateProfileSummary();
+            populateForm(profile);
+            setEditing(false);
+
+        } catch (error) {
+            showFeedback(
+                error.message || "Unable to load account information.",
+                "error"
+            );
+
+            document.getElementById("displayName").textContent =
+                "Profile unavailable";
+
+            document.getElementById("accountStatus").textContent =
+                "Unable to load account";
+        }
+    }
+
+    loadProfile();
+</script>
+
+</body>
+</html>
+```
